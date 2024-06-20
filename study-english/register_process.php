@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bindParam(':password', $pass);
             $stmt->bindParam(':english_level', $english_level); // Додано рівень англійської мови
             if ($stmt->execute()) {
-                echo "Реєстрація успішна!";
                 // Встановлення сесійної змінної для нового користувача
                 session_start();
                 $_SESSION['user_id'] = $conn->lastInsertId(); // Отримання ID нового користувача
@@ -31,10 +30,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 echo "Помилка реєстрації!";
             }
-            
         }
     } catch (PDOException $e) {
         echo "Помилка: " . $e->getMessage();
     }
+}
+
+// Виведення повідомлення про успішну реєстрацію після редиректу
+if (isset($_SESSION['success_message'])) {
+    echo $_SESSION['success_message'];
+    unset($_SESSION['success_message']);
 }
 ?>

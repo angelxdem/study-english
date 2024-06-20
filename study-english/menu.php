@@ -1,40 +1,62 @@
 <style>
-        /* Стилі для навігаційного бару */
-        nav {
-            background-color: #333;
-            padding: 10px;
-            color: #fff;
-            text-align: center;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-        /* Стилі для контейнера інформації */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
-    </style>
+    header {
+        background: #333;
+        color: #fff;
+        padding: 20px 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+    }
 
-<nav>
-    <ul>
-        <li><a href="index.php">Головна</a></li>
-        <li><a href="materials.php">Навчальні матеріали</a></li>
-        <li><a href="levels.php">Тренуватися</a></li>
-        <li><a href="results.php">Результати</a></li>
-        <li><a href="profile.php">Профіль</a></li>
-        <li><a href="logout.php">Вийти</a></li>
-    </ul>
-</nav>
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .logo span {
+        color: #ff6b6b;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+    }
+
+    nav ul li {
+        margin-left: 20px;
+    }
+
+    nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+        color: #ff6b6b;
+    }
+</style>
+<header>
+    <nav>
+        <div class="logo">Study<span>English</span></div>
+        <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="materials.php">Study Materials</a></li>
+            <li><a href="levels.php">Practice</a></li>
+            <li><a href="results.php">Results</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="logout.php">Logout</a></li>
+
+        </ul>
+    </nav>
+</header>

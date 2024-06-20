@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Перевірка, чи введений вік є числом
     if (!is_numeric($age)) {
-        $error = "Введіть правильний вік";
+        $error = "Please enter a valid age";
     } else {
         // Оновлення даних користувача в базі даних
         try {
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("Location: profile.php?success=1");
             exit();
         } catch (PDOException $e) {
-            $error = "Помилка: " . $e->getMessage();
+            $error = "Error: " . $e->getMessage();
         }
     }
 }
@@ -41,37 +41,61 @@ try {
     $stmt->execute([$_SESSION['user_id']]);
     $profile = $stmt->fetch(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    $error = "Помилка: " . $e->getMessage();
+    $error = "Error: " . $e->getMessage();
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Профіль</title>
+    <title>Profile</title>
     
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Стилі для форми */
-        form {
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            margin-top: 120px;
+        }
+        .container {
             width: 50%;
             margin: auto;
+            margin-top: 50px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
+        h2 {
+            text-align: center;
+        }
+        /* Form styles */
+        form {
+            width: 100%;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
         input[type="text"],
         input[type="email"],
-        textarea {
-            width: 100%;
+        textarea,
+        select {
+            width: calc(100% - 22px);
             padding: 10px;
-            margin: 5px 0;
+            margin-top: 5px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
         }
-
         input[type="submit"] {
+            width: 100%;
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
@@ -79,42 +103,13 @@ try {
             border-radius: 5px;
             cursor: pointer;
         }
-
         input[type="submit"]:hover {
             background-color: #45a049;
         }
-
-        select {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            background-color: #fff;
-            /* Фоновий колір для вибору */
-            font-size: 16px;
-            /* Розмір шрифту */
-            color: #555;
-            /* Колір тексту */
-        }
-
-        select:hover {
-            border-color: #aaa;
-            /* Колір рамки при наведенні */
-        }
-
-        /* Стилі для активного вибору */
-        select:focus {
-            border-color: #4CAF50;
-            /* Колір рамки при активному виборі */
-            outline: none;
-            /* Приховує контурний зовнішній контур */
-        }
-
-
+        /* Error message */
         .error {
             color: red;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -122,38 +117,39 @@ try {
 <body>
     <?php include 'menu.php'; ?>
 
-    <h2 style="text-align: center;">Профіль</h2>
-    <?php
-    // Вивід повідомлення про успішне оновлення профілю
-    if (isset($_GET['success']) && $_GET['success'] == 1) {
-        echo "<p class='success'>Дані збережені успішно!</p>";
-    }
-    // Вивід повідомлення про помилку
-    if (isset($error)) echo "<p class='error'>$error</p>";
-    ?>
-    <form method="post">
-        <label for="email">Електронна пошта:</label><br>
-        <input type="email" id="email" name="email" value="<?php echo $profile['email']; ?>"><br>
+    <div class="container">
+        <h2>Profile</h2>
+        <?php
+        // Display message for successful profile update
+        if (isset($_GET['success']) && $_GET['success'] == 1) {
+            echo "<p class='success'>Data saved successfully!</p>";
+        }
+        // Display error message
+        if (isset($error)) echo "<p class='error'>$error</p>";
+        ?>
+        <form method="post">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="<?php echo $profile['email']; ?>">
 
-        <label for="phone">Номер телефону:</label><br>
-        <input type="text" id="phone" name="phone" value="<?php echo $profile['phone']; ?>"><br>
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" value="<?php echo $profile['phone']; ?>">
 
-        <label for="age">Вік:</label><br>
-        <input type="text" id="age" name="age" value="<?php echo $profile['age']; ?>"><br>
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age" value="<?php echo $profile['age']; ?>">
 
-        <label for="english_level">Рівень англійської:</label><br>
-        <select id="english_level" name="english_level">
-            <option value="Beginner" <?php if ($profile['english_level'] == "Beginner") echo 'selected'; ?>>Початковий</option>
-            <option value="Intermediate" <?php if ($profile['english_level'] == "Intermediate") echo 'selected'; ?>>Середній</option>
-            <option value="Advanced" <?php if ($profile['english_level'] == "Advanced") echo 'selected'; ?>>Високий</option>
-        </select><br>
+            <label for="english_level">English Level:</label>
+            <select id="english_level" name="english_level">
+                <option value="Beginner" <?php if ($profile['english_level'] == "Beginner") echo 'selected'; ?>>Beginner</option>
+                <option value="Intermediate" <?php if ($profile['english_level'] == "Intermediate") echo 'selected'; ?>>Intermediate</option>
+                <option value="Advanced" <?php if ($profile['english_level'] == "Advanced") echo 'selected'; ?>>Advanced</option>
+            </select>
 
+            <label for="about_me">About Me:</label>
+            <textarea id="about_me" name="about_me"><?php echo $profile['about_me']; ?></textarea>
 
-        <label for="about_me">Про мене:</label><br>
-        <textarea id="about_me" name="about_me"><?php echo $profile['about_me']; ?></textarea><br>
-
-        <input type="submit" value="Зберегти">
-    </form>
+            <input type="submit" value="Save">
+        </form>
+    </div>
 </body>
 
 </html>

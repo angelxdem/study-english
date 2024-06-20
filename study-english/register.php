@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Реєстрація</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,6 +21,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
         }
 
         h2 {
@@ -32,13 +35,30 @@
         }
 
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        select {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
+            background-color: #fff;
+            font-size: 16px;
+            color: #555;
+        }
+
+        input[type="text"]:hover,
+        input[type="password"]:hover,
+        select:hover {
+            border-color: #aaa;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            border-color: #4CAF50;
+            outline: none;
         }
 
         button[type="submit"] {
@@ -55,57 +75,29 @@
             background-color: #45a049;
         }
 
-        .register-link {
+        .login-link {
             text-align: center;
         }
-        select {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            background-color: #fff;
-            /* Фоновий колір для вибору */
-            font-size: 16px;
-            /* Розмір шрифту */
-            color: #555;
-            /* Колір тексту */
-        }
-
-        select:hover {
-            border-color: #aaa;
-            /* Колір рамки при наведенні */
-        }
-
-        /* Стилі для активного вибору */
-        select:focus {
-            border-color: #4CAF50;
-            /* Колір рамки при активному виборі */
-            outline: none;
-            /* Приховує контурний зовнішній контур */
-        }
-
     </style>
 </head>
 <body>
-<div class="container">
-        <h2>Реєстрація</h2>
+    <div class="container">
+        <h2>Registration</h2>
         <form method="POST" action="register_process.php">
-            <label for="username">Логін:</label>
+            <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
-            <label for="password">Пароль:</label>
+            <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <label for="english_level">Рівень англійської:</label>
+            <label for="english_level">English Level:</label>
             <select id="english_level" name="english_level">
-                <option value="Beginner">Початковий</option>
-                <option value="Intermediate">Середній</option>
-                <option value="Advanced">Високий</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
             </select>
-            <button type="submit">Зареєструватися</button>
+            <button type="submit">Register</button>
         </form>
         <div class="login-link">
-            <p>Вже маєте акаунт? <a href="login.php">Увійти</a></p>
+            <p>Already have an account? <a href="login.php">Log in</a></p>
         </div>
     </div>
 </body>

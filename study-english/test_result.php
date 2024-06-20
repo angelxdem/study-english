@@ -20,8 +20,8 @@ $results = $_SESSION['test_results'];
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<?php include 'menu.php'; ?>
     <div class="container">
-        <?php include 'menu.php'; ?>
         <h2>Результати тесту</h2>
         <p>Ви відповіли правильно на <?php echo htmlspecialchars($score); ?> з <?php echo htmlspecialchars($total); ?> питань.</p>
         

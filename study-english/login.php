@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Логін</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,6 +21,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
         }
 
         h2 {
@@ -39,6 +42,20 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
+            background-color: #fff;
+            font-size: 16px;
+            color: #555;
+        }
+
+        input[type="text"]:hover,
+        input[type="password"]:hover {
+            border-color: #aaa;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #4CAF50;
+            outline: none;
         }
 
         button[type="submit"] {
@@ -62,16 +79,16 @@
 </head>
 <body>
     <div class="container">
-        <h2>Логін</h2>
+        <h2>Login</h2>
         <form method="POST" action="login_process.php">
-            <label for="username">Логін:</label>
+            <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
-            <label for="password">Пароль:</label>
+            <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <button type="submit">Увійти</button>
+            <button type="submit">Login</button>
         </form>
         <div class="register-link">
-            <p>Ще не зареєстровані? <a href="register.php">Зареєструватися</a></p>
+            <p>Not registered yet? <a href="register.php">Register here</a></p>
         </div>
     </div>
 </body>
